@@ -200,6 +200,7 @@ export default {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-content: center;
     margin: 20px 0 0;
 }
 
@@ -209,7 +210,6 @@ export default {
     text-decoration: none;
     display: inline-block;
     transition: all 0.3s;
-    height: 100%;
     padding: 10px;
     flex: 1 1 0;
     text-align: center;

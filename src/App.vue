@@ -162,6 +162,7 @@ h1 {
   text-align: center;
   width: 100%;
   grid-column: 2/3;
+  font-size: clamp(45px, 7vw, 80px);
 }
 
 .userName-logout {
@@ -247,5 +248,14 @@ h1 {
   color: #F1F1F1;
   width: clamp(300px, 50%, 500px);
   border-bottom: 1px solid #808080;
+}
+
+@media screen and (max-width:730px) {
+  
+
+  h1, .logout {
+    grid-column: 1/4;
+    row-gap: 50px;
+  }
 }
 </style>

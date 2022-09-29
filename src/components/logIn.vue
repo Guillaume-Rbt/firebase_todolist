@@ -15,7 +15,9 @@
             </div>
 
         </form>
-
+        <div class="error">
+            <p v-for="error in errors" v-bind:key="error.id"> {{ error }}</p>
+        </div>
     </div>
 
 </template>
@@ -34,18 +36,23 @@ export default {
         return {
             loginEmail: "",
             loginPassword: "",
+            errors:[],
         }
     },
 
     methods: {
         handleLogin: function () {
             try {
-                signInWithEmailAndPassword(auth, this.loginEmail, this.loginPassword)
-                this.$emit("authenticated")
+                signInWithEmailAndPassword(auth, this.loginEmail, this.loginPassword).then(()=> {this.$emit("authenticated")})
+                .catch((error)=>{ 
+                    this.errors = [];
+                    console.log(error)
+                    this.errors.push('L\'identifiant ou le mot de passe sont incorrects')})
+                
 
             }
             catch (error) {
-                console.log(error)
+                console.log('error')
             }
         }
     },
