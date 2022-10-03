@@ -1,5 +1,5 @@
 <template>
-    <div class="container_signUp">
+    <div class="container_form">
         <h2 class="title_login">Inscription</h2>
         <form method="post" @submit.prevent="register">
             <div class="form_row">

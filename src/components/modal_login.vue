@@ -111,7 +111,7 @@ export default {
   opacity: 0;
 }
 
-.container_login, .container_signUp {
+.container_form, .container_signUp {
   width: 50%;
   min-width: 250px;
   height: calc(100% - 20px);

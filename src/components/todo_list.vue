@@ -1,9 +1,15 @@
 <template>
-    <div class="container-todo">
+    <div class="container_todo">
         <div class="todo-header">
-            <input class="new-todo" type="text" placeholder="Ajouter une nouvelle tâche" v-model="newTodo"
-                @keyup.enter="addNewTodo" />
-            <div class="field-group"><input type="checkbox" v-model="allCompleted" @change="handleAllCompleted" />
+
+            <div class="newTodo_container">
+                <input class="newTodo_field" type="text" placeholder="Ajouter une nouvelle tâche" v-model="newTodo"
+                    @keyup.enter="addNewTodo" />
+            <button class="btn btn-1" @click="addNewTodo"><span class="material-symbols-rounded">add </span></button>
+
+            </div>
+
+            <div class="field_group"><input type="checkbox" v-model="allCompleted" @change="handleAllCompleted" />
                 <label>Cocher/décocher toutes les tâches</label>
             </div>
             <div class="filters">
@@ -16,7 +22,7 @@
         </div>
 
 
-        <ul class="todos-list">
+        <ul class="todos_list">
             <li v-for="todo in filterTodoList" v-bind:key="todo.id" :class="{editing: todo === editTodo}"> <input
                     type="checkbox" v-model="todo.completed" @change="toggleCompleted(todo)"><span
                     @dblclick="editingTodo(todo)" :class="{ completed: todo.completed }">{{ todo.title }}</span><a
@@ -165,34 +171,38 @@ export default {
 
 
 <style >
-.container-todo {
+.container_todo {
     width: 100%;
     background-color: #242424;
     padding: 10px;
     border-radius: 0 0 10px 10px;
 }
 
-.new-todo {
+.newTodo_container {
+    display: flex;
+}
+
+.newTodo_field {
     padding: 10px 10px 10px 0;
     font-size: 20px;
     outline: none;
     background: transparent;
     border: none;
     color: #F1F1F1;
-    width: 100%;
+    width: calc(100% - 34px);
 }
 
-.field-group {
+.field_group {
     display: flex;
     align-items: center;
     margin: 10px 0 10px 0;
 }
 
-.field-group input {
+.field_group input {
     margin-right: 10px;
 }
 
-.field-group input:checked {
+.field_group input:checked {
     margin-right: 10px !important;
 }
 
@@ -227,7 +237,7 @@ export default {
     border-top-right-radius: 10px;
 }
 
-.todos-list {
+.todos_list {
     list-style: none;
     padding: 20px 0 0;
     background-color: #191919;
@@ -235,7 +245,7 @@ export default {
     margin-bottom: 10px;
 }
 
-.todos-list li {
+.todos_list li {
     padding: 10px;
     display: flex;
     align-items: center;
@@ -249,7 +259,7 @@ export default {
     color: #808080
 }
 
-.todos-list li span {
+.todos_list li span {
     display: inline-block;
     width: -webkit-max-content;
     width: -moz-max-content;
@@ -257,7 +267,7 @@ export default {
     position: relative;
 }
 
-.todos-list li span::before {
+.todos_list li span::before {
     content: "";
     width: 100%;
     height: 4px;
@@ -269,11 +279,11 @@ export default {
     transition: transform 0.3s;
 }
 
-.todos-list li span.completed {
+.todos_list li span.completed {
     opacity: 0.5;
 }
 
-.todos-list li span.completed::before {
+.todos_list li span.completed::before {
     transform: scaleX(1);
     transition: transform 0.3s;
 }
@@ -321,7 +331,7 @@ input[type=checkbox]:after {
     transition: all 0.1s;
 }
 
-.todos-list input[type=checkbox]:after {
+.todos_list input[type=checkbox]:after {
     background-color: #191919;
 }
 

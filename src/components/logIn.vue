@@ -1,5 +1,5 @@
 <template>
-    <div class="container_login">
+    <div class="container_form">
         <h2 class="title_login">Connexion</h2>
         <form @submit.prevent="handleLogin">
             <div class="form_row">

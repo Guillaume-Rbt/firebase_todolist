@@ -1,5 +1,14 @@
 # firebase_todolist
 
+A todolist application in VueJS and using firebase
+
+
+For testing the project : 
+
+1. Create a .env file and indicate the project information like  'src/firebase/index.js'
+2. Your fire store must contains two collections : "todo-List" and "todos"
+
+
 ## Project setup
 ```
 npm install

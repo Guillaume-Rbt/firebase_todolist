@@ -2,18 +2,26 @@
   <main>
     <header>
       <h1>My Tasks</h1>
+      <transition name="fadeModal">
       <div class="userName-logout" v-if="this.isAuthenticated">
         <p class="userName"><span class="initiale"> {{ currentUser.displayName[0] }}</span> {{ currentUser.displayName
         }} <span title="Se déconnecter" class="material-symbols-rounded logout" @click="handleLogout">logout</span>
         </p>
       </div>
+    </transition>
     </header>
 
     <transition name="fadeModal">
       <modal_login v-if="!this.isAuthenticated" @authenticated="authentification"></modal_login>
     </transition>
-    <input type="text" placeholder="Ajouter une liste de tâches" class="newTodoList" v-model="newTodoList"
-      @keyup.enter="addTodoList" v-if="this.isAuthenticated">
+
+    <transition name="fadeModal">
+    <div v-if="this.isAuthenticated">
+    <div class="addTodoList_container">
+      <input type="text" placeholder="Ajouter une liste de tâches" class="newTodoList_field" v-model="newTodoList"
+        @keyup.enter="addTodoList" v-if="this.isAuthenticated">
+      <button class="btn btn-1" @click="addTodoList"><span class="material-symbols-rounded">add </span></button>
+    </div>
 
     <div class="todoList_container" v-if="this.isAuthenticated">
       <div class="todoList_item" v-for="list in allTodoList" :key="list.id">
@@ -21,8 +29,9 @@
             @click.prevent="deleteList(list)"><span class="material-symbols-rounded">delete</span></a> </h3>
         <todo_list :id="list.todoID"> </todo_list> <!-- props Id of the todolist to get the todos in the component  -->
       </div>
-
     </div>
+  </div>
+</transition>
   </main>
 </template>
 
@@ -127,6 +136,15 @@ export default {
 </script>
 
 <style>
+
+/*******************\
+
+Globals
+
+
+\*******************/
+
+
 :root {
   --blue: #00a2d4;
 }
@@ -155,7 +173,7 @@ header {
   width: 100%;
   margin: 50px 0 50px;
   display: grid;
-  grid-template-columns: repeat(3 , 1fr);
+  grid-template-columns: repeat(3, 1fr);
 }
 
 h1 {
@@ -165,6 +183,24 @@ h1 {
   font-size: clamp(45px, 7vw, 80px);
 }
 
+.btn{
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.btn.btn-1 {
+  background-color: #00a2d4;
+}
+
+.btn.btn-1 span {
+  color:#f1f1f1
+}
 .userName-logout {
   padding-right: 10px;
   width: 100%;
@@ -188,7 +224,7 @@ h1 {
   height: 40px;
   border-radius: 50%;
   background-color: var(--blue);
-  line-height:40px;
+  line-height: 40px;
   text-align: center;
   font-size: 30px;
   text-transform: uppercase;
@@ -213,16 +249,6 @@ h1 {
   color: #808080;
 }
 
-.fadeModal-enter-active,
-.fadeModal-leave-active {
-  transition: opacity 0.3s ease;
-
-}
-
-.fadeModal-enter-from,
-.fadeModal-leave-to {
-  opacity: 0;
-}
 
 .todoList_container {
   width: 100%;
@@ -234,12 +260,20 @@ h1 {
 }
 
 .todoList_item {
-  width: clamp(300px, 50%, 500px)
+  width: clamp(320px, 90%, 500px)
 }
 
-.newTodoList {
+.addTodoList_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 50px 0 50px;
+}
+
+
+
+.newTodoList_field {
   display: block;
-  margin: 50px auto;
   padding: 10px 10px 10px 0;
   font-size: 20px;
   outline: none;
@@ -250,12 +284,41 @@ h1 {
   border-bottom: 1px solid #808080;
 }
 
-@media screen and (max-width:730px) {
-  
 
-  h1, .logout {
-    grid-column: 1/4;
+/*******************\
+
+Transition
+
+\*******************/
+
+.fadeModal-enter-active,
+.fadeModal-leave-active {
+  transition: opacity 0.3s ease;
+
+}
+
+.fadeModal-enter-from,
+.fadeModal-leave-to {
+  opacity: 0;
+}
+
+
+/*******************\
+
+Resonsive
+
+\*******************/
+
+@media screen and (max-width:730px) {
+
+  header {
+    grid-template-columns: repeat(1, 1fr);
     row-gap: 50px;
+  }
+
+  h1,
+  .userName-logout {
+    grid-column: 1/2;
   }
 }
 </style>
