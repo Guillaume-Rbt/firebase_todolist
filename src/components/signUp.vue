@@ -68,9 +68,12 @@ export default {
                             window.location.href = '/'
                             this.$emit("authenticated")
                         }
-                        )
+                        ).catch( (error) => { if(error.message === "Firebase: Error (auth/email-already-in-use).") {
+                            this.errors.push('L\'email a déja été utilisé')
+                        }
+                        } )
                 } catch (error) {
-                    console.log(error)
+                   console.log(error)
                 }
 
 
@@ -84,4 +87,7 @@ export default {
 
 <style>
 
+.error {
+    color : #b12424
+}
 </style>
